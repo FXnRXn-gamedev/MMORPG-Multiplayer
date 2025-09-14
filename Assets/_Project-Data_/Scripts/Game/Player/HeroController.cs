@@ -18,7 +18,11 @@ namespace FXnRXn
 
 		#endregion
 		
+		#region Animation Variable Hashes
 		
+		private readonly int isRunningHash = Animator.StringToHash("IsRunning");
+		
+		#endregion
     		
 		#region Properties
 
@@ -39,6 +43,7 @@ namespace FXnRXn
 		private Camera camera;
 		private RaycastHit hit;
 		private NavMeshAgent agent;
+		private Animator animator;
 
 		private GameObject targetNow;
 		
@@ -61,6 +66,7 @@ namespace FXnRXn
 		{
 			if (agent == null) agent = GetComponent<NavMeshAgent>();
 			if (camera == null) camera = PlayerCameraController.Instance.GetMainCamera;
+			if (animator == null) animator = GetComponentInChildren<Animator>();
 
 			agent.speed = moveSpeed;
 		}
@@ -89,14 +95,23 @@ namespace FXnRXn
 					if (targetNow != null)
 					{
 						Destroy(targetNow);
-						
 					}
 					targetNow = Instantiate(mousePositionPrefab, pos, Quaternion.identity);
 					
 					if (agent != null) agent.SetDestination(pos);
+					if(animator != null) CmdSetAnimBool(isRunningHash, true);
 				}
-				
 			}
+
+			if (targetNow != null)
+			{
+				if (Vector3.Distance(transform.position, targetNow.transform.position) <= 1.0f)
+				{
+					Destroy(targetNow);
+					if(animator != null) CmdSetAnimBool(isRunningHash, false);
+				}
+			}
+			
 		}
 		
 		private Vector3 RayPosition()
@@ -127,6 +142,24 @@ namespace FXnRXn
 
 		#endregion
 
+
+		#region Network Update Server/Client
+		
+		[Command]
+		public void CmdSetAnimBool(int name, bool value)
+		{
+			RpcSetAnimBool(name, value);
+			animator.SetBool(name, value);
+		}
+
+		[ClientRpc]
+		private void RpcSetAnimBool(int name, bool value)
+		{
+			animator.SetBool(name, value);
+		}
+		#endregion
+		
+		
 		#endregion
 		
 		//--------------------------------------------------------------------------------------------------------------

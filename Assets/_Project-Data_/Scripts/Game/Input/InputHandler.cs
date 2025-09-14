@@ -27,10 +27,10 @@ namespace FXnRXn
 		[Space(10)]
 		[field: SerializeField] private bool cursorLocked = false;
 		
-		// [Header("Mobile Touch Settings")]
-		// [Space(10)]
-		// [field: SerializeField] private float touchSensitivity = 2.0f;
-		// [field: SerializeField] private float touchDeadZone = 50f;
+		[Header("Mobile Touch Settings")]
+		[Space(10)]
+		[field: SerializeField] private float touchSensitivity = 2.0f;
+		[field: SerializeField] private float touchDeadZone = 50f;
 
 		
 		
@@ -42,11 +42,11 @@ namespace FXnRXn
 		private Vector2 mousePosition;
 		private bool rightMouseClicked;
 		
-		// // Touch input fields
-		// private Vector2 touchStartPos;
-		// private Vector2 touchCurrentPos;
-		// private bool isTouching;
-		// private int activeTouchId = -1;
+		// Touch input fields
+		private Vector2 touchStartPos;
+		private Vector2 touchCurrentPos;
+		private bool isTouching;
+		private int activeTouchId = -1;
 		
 		// Touch input actions
 		private InputAction moveAction;
@@ -55,8 +55,8 @@ namespace FXnRXn
 		private InputAction mousePositionAction;
 
 		// // Touch input actions
-		// private InputAction touchPositionAction;
-		// private InputAction touchPressAction;
+		private InputAction touchPositionAction;
+		private InputAction touchPressAction;
 
 		#endregion
 		
@@ -149,34 +149,34 @@ namespace FXnRXn
 			mousePosition = ctx.ReadValue<Vector2>();
 		}
 		
-		// public void OnTouchPosition(InputAction.CallbackContext ctx)
-		// {
-		// 	if (isTouching)
-		// 	{
-		// 		touchCurrentPos = ctx.ReadValue<Vector2>();
-		// 		Vector2 touchDelta = touchCurrentPos - touchStartPos;
-		// 		
-		// 		// Apply touch sensitivity and convert to look input
-		// 		Vector2 lookDelta = touchDelta * touchSensitivity * Time.deltaTime;
-		// 		LookInput(lookDelta);
-		// 	}
-		// }
-		//
-		// public void OnTouchPress(InputAction.CallbackContext ctx)
-		// {
-		// 	if (ctx.performed)
-		// 	{
-		// 		isTouching = true;
-		// 		touchStartPos = Touchscreen.current.primaryTouch.position.ReadValue();
-		// 		touchCurrentPos = touchStartPos;
-		// 	}
-		// }
+		public void OnTouchPosition(InputAction.CallbackContext ctx)
+		{
+			if (isTouching)
+			{
+				touchCurrentPos = ctx.ReadValue<Vector2>();
+				Vector2 touchDelta = touchCurrentPos - touchStartPos;
+				
+				// Apply touch sensitivity and convert to look input
+				Vector2 lookDelta = touchDelta * touchSensitivity * Time.deltaTime;
+				LookInput(lookDelta);
+			}
+		}
+		
+		public void OnTouchPress(InputAction.CallbackContext ctx)
+		{
+			if (ctx.performed)
+			{
+				isTouching = true;
+				touchStartPos = Touchscreen.current.primaryTouch.position.ReadValue();
+				touchCurrentPos = touchStartPos;
+			}
+		}
 
-		// public void OnTouchRelease(InputAction.CallbackContext ctx)
-		// {
-		// 	isTouching = false;
-		// 	activeTouchId = -1;
-		// }
+		public void OnTouchRelease(InputAction.CallbackContext ctx)
+		{
+			isTouching = false;
+			activeTouchId = -1;
+		}
 
 #endif
 		

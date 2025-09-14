@@ -56,12 +56,13 @@ namespace FXnRXn
 		{
 			// Cache the main camera component
 			mainCamera = GetComponentInChildren<Camera>();
+			transform.position = cameraOffset;
 		}
 
 		private void LateUpdate()
 		{
 			if (Hero == null) return;
-            
+
 			UpdateCameraPosition();
 		}
 

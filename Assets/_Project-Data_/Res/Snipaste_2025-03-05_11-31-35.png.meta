@@ -1,0 +1,662 @@
+fileFormatVersion: 2
+guid: 2c55030d7a731654a81eb356dd8dfa64
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 713
+        width: 181
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c8bc1cf4b60d1d488cba28ae873b4db
+      internalID: -712399450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_1
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 713
+        width: 181
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bacfd9760386614f831f918d5946d73
+      internalID: -1027538057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_2
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 713
+        width: 181
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cafc5139516b0f949b1f251b5245be24
+      internalID: -1145554279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_3
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 713
+        width: 181
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 230ada181288eaa4f9e7c639d854eff5
+      internalID: 244060541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 536
+        width: 181
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 7}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf110abaf59095d489af88520e5b12a6
+      internalID: -805016840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_5
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 536
+        width: 181
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8d6b644cd2dccd45a21dfa137e0d902
+      internalID: 399859097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_6
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 536
+        width: 181
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c7ad83746880264ba6576b99f68942d
+      internalID: -823197302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_7
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 536
+        width: 181
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83834afe3a6a3c24487bd0dfb0d6f18d
+      internalID: -1104685708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 359
+        width: 181
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3936993f312ae5e4b873a197ea942e28
+      internalID: 504274877
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_9
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 359
+        width: 181
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 153bb41592c823346b2e9d35c725d0a7
+      internalID: -621676266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_10
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 359
+        width: 181
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaa518c90c22fff46ac443777ce3ea4d
+      internalID: 1707646571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_11
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 359
+        width: 181
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d7d55997b333bd46b8ca787b083b763
+      internalID: 959635848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 182
+        width: 181
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81a14c495938e1e44af8b2b33d019350
+      internalID: -737414566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_13
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 182
+        width: 181
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3eb78ae91f78634ba63873f2128bc5e
+      internalID: 1077090090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_14
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 182
+        width: 181
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: de5067bf2361e6341a2376e844b600f8
+      internalID: 1180516738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_15
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 182
+        width: 181
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfc491f9d5d63bb4bb4cc33754c8f37d
+      internalID: 375317384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5
+        width: 181
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a048e167b439544295fab266cf209ab
+      internalID: 1040156314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_17
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 5
+        width: 181
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d0178bc8b2553b448af9b835a0fe678
+      internalID: 2035069630
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_18
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 5
+        width: 181
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1ed7e954a9511844a476254b16df250
+      internalID: 723208132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_19
+      rect:
+        serializedVersion: 2
+        x: 543
+        y: 5
+        width: 181
+        height: 177
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6dbe0ba03ce8fa849b014a4afd6be589
+      internalID: -1542548065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_20
+      rect:
+        serializedVersion: 2
+        x: 728
+        y: 714
+        width: 169
+        height: 172
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3485ad6f1b97ead4db6d68eba0df255d
+      internalID: -808240115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_21
+      rect:
+        serializedVersion: 2
+        x: 729
+        y: 537
+        width: 168
+        height: 172
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f6094f626bd90a47b38fc0941a9b744
+      internalID: 1875761447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_22
+      rect:
+        serializedVersion: 2
+        x: 730
+        y: 361
+        width: 168
+        height: 175
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6997318fe6cf4fe4da46d72b6a1daadd
+      internalID: -1784441377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_23
+      rect:
+        serializedVersion: 2
+        x: 729
+        y: 179
+        width: 169
+        height: 182
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f3c9d11fcac0384a83976471eb6c103
+      internalID: -1697470068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snipaste_2025-03-05_11-31-35_24
+      rect:
+        serializedVersion: 2
+        x: 729
+        y: 3
+        width: 168
+        height: 171
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c036a6b5945718e448be1e3bed3c4d1c
+      internalID: -375828337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 8344c49eaa435894da9457cb3ad17816
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Snipaste_2025-03-05_11-31-35_0: -712399450
+      Snipaste_2025-03-05_11-31-35_1: -1027538057
+      Snipaste_2025-03-05_11-31-35_10: 1707646571
+      Snipaste_2025-03-05_11-31-35_11: 959635848
+      Snipaste_2025-03-05_11-31-35_12: -737414566
+      Snipaste_2025-03-05_11-31-35_13: 1077090090
+      Snipaste_2025-03-05_11-31-35_14: 1180516738
+      Snipaste_2025-03-05_11-31-35_15: 375317384
+      Snipaste_2025-03-05_11-31-35_16: 1040156314
+      Snipaste_2025-03-05_11-31-35_17: 2035069630
+      Snipaste_2025-03-05_11-31-35_18: 723208132
+      Snipaste_2025-03-05_11-31-35_19: -1542548065
+      Snipaste_2025-03-05_11-31-35_2: -1145554279
+      Snipaste_2025-03-05_11-31-35_20: -808240115
+      Snipaste_2025-03-05_11-31-35_21: 1875761447
+      Snipaste_2025-03-05_11-31-35_22: -1784441377
+      Snipaste_2025-03-05_11-31-35_23: -1697470068
+      Snipaste_2025-03-05_11-31-35_24: -375828337
+      Snipaste_2025-03-05_11-31-35_3: 244060541
+      Snipaste_2025-03-05_11-31-35_4: -805016840
+      Snipaste_2025-03-05_11-31-35_5: 399859097
+      Snipaste_2025-03-05_11-31-35_6: -823197302
+      Snipaste_2025-03-05_11-31-35_7: -1104685708
+      Snipaste_2025-03-05_11-31-35_8: 504274877
+      Snipaste_2025-03-05_11-31-35_9: -621676266
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
