@@ -41,6 +41,7 @@ namespace FXnRXn
 		private Vector2	look;
 		private Vector2 mousePosition;
 		private bool rightMouseClicked;
+		private bool leftMouseClicked;
 		
 		// Touch input fields
 		private Vector2 touchStartPos;
@@ -51,12 +52,14 @@ namespace FXnRXn
 		// Touch input actions
 		private InputAction moveAction;
 		private InputAction lookAction;
+		private InputAction leftClickAction;
 		private InputAction rightClickAction;
 		private InputAction mousePositionAction;
 
 		// // Touch input actions
 		private InputAction touchPositionAction;
 		private InputAction touchPressAction;
+		
 
 		#endregion
 		
@@ -81,6 +84,11 @@ namespace FXnRXn
 				
 				mousePositionAction = InputSystem.actions.FindAction("MousePosition");
 				mousePositionAction.performed += OnMousePosition;
+				
+				leftClickAction = InputSystem.actions.FindAction("Attack");
+				leftClickAction.performed += OnLeftClick;
+				leftClickAction.canceled += OnLeftClick;
+
 				
 				// Add touch input actions
 				// touchPositionAction = InputSystem.actions.FindAction("TouchPosition");
@@ -110,17 +118,7 @@ namespace FXnRXn
 		{
 			inputActionAsset.FindActionMap("Player").Disable();
 		}
-
-
-		private void Update()
-		{
-			// Handle mobile touch input if no Input System touch actions are set up
-			// if (touchPositionAction == null && touchPressAction == null)
-			// {
-			// 	HandleMobileTouchInput();
-			// }
-
-		}
+		
 
 		#endregion
 		
@@ -147,6 +145,11 @@ namespace FXnRXn
 		public void OnMousePosition(InputAction.CallbackContext ctx)
 		{
 			mousePosition = ctx.ReadValue<Vector2>();
+		}
+		
+		public void OnLeftClick(InputAction.CallbackContext ctx)
+		{
+			leftMouseClicked = ctx.performed;
 		}
 		
 		public void OnTouchPosition(InputAction.CallbackContext ctx)
@@ -180,61 +183,6 @@ namespace FXnRXn
 
 #endif
 		
-		// private void HandleMobileTouchInput()
-		// {
-		// 	// Handle touch input manually if Input System touch actions aren't configured
-		// 	if (Input.touchCount > 0)
-		// 	{
-		// 		Touch touch = Input.GetTouch(0);
-		// 		
-		// 		switch (touch.phase)
-		// 		{
-		// 			case TouchPhase.Began:
-		// 				isTouching = true;
-		// 				activeTouchId = touch.fingerId;
-		// 				touchStartPos = touch.position;
-		// 				touchCurrentPos = touch.position;
-		// 				break;
-		// 				
-		// 			case TouchPhase.Moved:
-		// 				if (isTouching && activeTouchId == touch.fingerId)
-		// 				{
-		// 					touchCurrentPos = touch.position;
-		// 					Vector2 touchDelta = touchCurrentPos - touchStartPos;
-		// 					
-		// 					// Only process if touch moved beyond dead zone
-		// 					if (touchDelta.magnitude > touchDeadZone)
-		// 					{
-		// 						Vector2 lookDelta = touchDelta * touchSensitivity * Time.deltaTime;
-		// 						LookInput(lookDelta);
-		// 						touchStartPos = touchCurrentPos; // Update start position for smooth movement
-		// 					}
-		// 				}
-		// 				break;
-		// 				
-		// 			case TouchPhase.Ended:
-		// 			case TouchPhase.Canceled:
-		// 				if (activeTouchId == touch.fingerId)
-		// 				{
-		// 					isTouching = false;
-		// 					activeTouchId = -1;
-		// 					LookInput(Vector2.zero); // Reset look input
-		// 				}
-		// 				break;
-		// 		}
-		// 		
-		// 		// Handle tap as right click equivalent for mobile
-		// 		if (touch.phase == TouchPhase.Ended && touch.tapCount == 1)
-		// 		{
-		// 			Vector2 tapDelta = touch.position - touchStartPos;
-		// 			if (tapDelta.magnitude < touchDeadZone) // Only register as tap if within dead zone
-		// 			{
-		// 				rightMouseClicked = true;
-		// 				mousePosition = touch.position;
-		// 			}
-		// 		}
-		// 	}
-		// }
 
 		public void MoveInput(Vector2 newMoveDirection)
 		{
@@ -259,6 +207,13 @@ namespace FXnRXn
 		{
 			bool clicked = rightMouseClicked;
 			rightMouseClicked = false; // Reset after reading
+			return clicked;
+		}
+		
+		public bool GetLeftMouseDown() 
+		{
+			bool clicked = leftMouseClicked;
+			leftMouseClicked = false; // Reset after reading
 			return clicked;
 		}
 		

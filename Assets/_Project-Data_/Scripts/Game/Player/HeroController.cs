@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using Mirror;
 using UnityEngine;
 using UnityEngine.AI;
@@ -21,6 +22,7 @@ namespace FXnRXn
 		#region Animation Variable Hashes
 		
 		private readonly int isRunningHash = Animator.StringToHash("IsRunning");
+		private readonly int isAttackingHash = Animator.StringToHash("Attack");
 		
 		#endregion
     		
@@ -28,33 +30,58 @@ namespace FXnRXn
 
 		[Header("Settings")] 
 		[Space(10)] 
-		[field: SerializeField] private float moveSpeed = 1f;
+		[field: SerializeField] private float				moveSpeed = 1f;
+		[field: SerializeField] private float				attackRange = 5.0f;
+		
+		[Header("Stat")] 
+		[Space(10)] 
+		[field: SerializeField] private float				ATK_damage;
 		
 		[Header("Refference")]
 		[Space(10)]
-		[field: SerializeField] private GameObject mousePositionPrefab;
+		[field: SerializeField] private GameObject			mousePositionPrefab;
+		[field: SerializeField] private GameObject			defaultPlane;
+		[field: SerializeField] private GameObject			plane2;
 		
 		[Header("Mouse Input")]
 		[Space(10)]
-		[field: SerializeField] private LayerMask groundLayerMask;
+		[field: SerializeField] private LayerMask			groundLayerMask;
+		
+		[Header("Attack")]
+		[Space(10)]
+		[field: SerializeField] private LayerMask			enemyLayerMask;
+		[field: SerializeField] private Transform			attackHitBoxTransform;
+		[field: SerializeField] private GameObject			attackHitBox;
+		
+		
+		
 		
 		
 		// Private fields
 		private Camera camera;
 		private RaycastHit hit;
+		private RaycastHit attackHit;
 		private NavMeshAgent agent;
 		private Animator animator;
 
 		private GameObject targetNow;
-		
+		private GameObject targetAttackActor;
+
+		private bool isAttack = false;
+		[SyncVar] private bool canAttack = true;
 		#endregion
 
 		#region Network Method
-
 		public override void OnStartLocalPlayer()
 		{
 			base.OnStartLocalPlayer();
-			if(PlayerCameraController.Instance != null) PlayerCameraController.Instance.SetHero(gameObject);
+			if(PlayerCameraController.Instance != null) PlayerCameraController.Instance.SetHero(gameObject); 
+			
+		}
+
+		public override void OnStopLocalPlayer()
+		{
+			base.OnStopLocalPlayer();
 			
 		}
 
@@ -63,12 +90,25 @@ namespace FXnRXn
 		#region Unity Callbacks
 
 		private void Start()
-		{
+		{	
 			if (agent == null) agent = GetComponent<NavMeshAgent>();
 			if (camera == null) camera = PlayerCameraController.Instance.GetMainCamera;
 			if (animator == null) animator = GetComponentInChildren<Animator>();
-
+			
 			agent.speed = moveSpeed;
+			if (isLocalPlayer)
+			{
+				SetPlane();
+			}
+			
+			AnimationEventHandler.onAttackAnimationEndEvent += OnAttackAnimationEnd;
+			AnimationEventHandler.onAttackHitEvent += OnAttackHit;
+		}
+
+		private void OnDisable()
+		{
+			AnimationEventHandler.onAttackAnimationEndEvent -= OnAttackAnimationEnd;
+			AnimationEventHandler.onAttackHitEvent -= OnAttackHit;
 		}
 
 		private void Update()
@@ -77,6 +117,8 @@ namespace FXnRXn
 			if(camera == null) return;
 			
 			MovementHandler();
+			HandleAttackInput();
+			
 		}
 
 		#endregion
@@ -87,6 +129,8 @@ namespace FXnRXn
 
 		private void MovementHandler()
 		{
+			if(isAttack) return;
+			
 			if (InputHandler.Instance.GetRightMouseDown())
 			{
 				Vector3 pos = RayPosition();
@@ -116,47 +160,209 @@ namespace FXnRXn
 		
 		private Vector3 RayPosition()
 		{
-			Vector3 tempHitPoint = Vector3.zero;
-			if (camera != null)
+			if (camera == null) return Vector3.zero;
+			
+			Ray ray = camera.ScreenPointToRay(InputHandler.Instance.GetMousePosition());
+			if (Physics.Raycast(ray, out hit, 1000.0f, groundLayerMask))
 			{
-				Ray ray = camera.ScreenPointToRay(InputHandler.Instance.GetMousePosition());
-				Physics.Raycast(ray, out hit, 1000.0f, groundLayerMask);
-				if (hit.collider != null)
+				if (hit.collider.gameObject.CompareTag("NotMoveTag"))
 				{
-					if (hit.collider.gameObject.CompareTag("NotMoveTag"))
-					{
-						tempHitPoint = Vector3.zero;
-					}
-					else
-					{
-						tempHitPoint = hit.point;
-					}
+					return Vector3.zero;
 				}
-				else
+				return hit.point;
+			}
+			return Vector3.zero;
+		}
+
+		#endregion
+
+		#region Player Attack
+
+		private void HandleAttackInput()
+		{
+			// Only process attack input if not currently attacking and can attack
+			if (InputHandler.Instance.GetLeftMouseDown() && canAttack)//&& !isAttacking
+			{
+				GameObject enemyTarget = GetEnemyFromRaycast();
+				if (enemyTarget != null && IsEnemyInRange(enemyTarget))
 				{
-					tempHitPoint = Vector3.zero;
+					InitiateAttack(enemyTarget);
 				}
 			}
-			return tempHitPoint;
+		}
+
+		private void InitiateAttack(GameObject enemy)
+		{
+			if (enemy == null) return; // || isAttacking
+			
+			// Set color to enemy[Red : Attack]
+			if (targetAttackActor != null)
+			{
+				targetAttackActor.GetComponent<EnemyControllerBase>()?.DoNotChoose();
+			}
+			
+			// Set attack target and state
+			targetAttackActor = enemy;
+			targetAttackActor.GetComponent<EnemyControllerBase>()?.BeChoose();
+			
+			// Face the enemy
+			Vector3 directionToEnemy = (enemy.transform.position - transform.position).normalized;
+			directionToEnemy.y = 0; // Keep only horizontal rotation
+			if (directionToEnemy != Vector3.zero)
+			{
+				transform.rotation = Quaternion.LookRotation(directionToEnemy);
+			}
+			
+			// Player can attack
+			isAttack = true;
+			canAttack = false;
+			
+			// Stop movement
+			if (agent != null && agent.isActiveAndEnabled)
+			{
+				agent.ResetPath();
+			}
+			// Stop running animation
+			if (animator != null)
+			{
+				CmdSetAnimBool(isRunningHash, false);
+			}
+			
+			// Trigger attack animation
+			CmdSetAnimTrigger(isAttackingHash);
+			
+			
+			//Invoke("CmdCreateAttackHitBox", 0.5f);
+			Invoke("ResetAttack", 2f);
+		
+		}
+		
+		private GameObject GetEnemyFromRaycast()
+		{
+			if (camera == null) return null;
+			
+			Ray ray = camera.ScreenPointToRay(InputHandler.Instance.GetMousePosition());
+			if (Physics.Raycast(ray, out attackHit, 1000.0f, enemyLayerMask))
+			{
+				return attackHit.collider.gameObject;
+			}
+			
+			return null;
+		}
+
+		private bool IsEnemyInRange(GameObject enemy)
+		{
+			if (enemy == null) return false;
+			
+			return Vector3.Distance(transform.position, enemy.transform.position) <= attackRange;
+		}
+
+		public void ResetAttack()
+		{
+			isAttack = false;
+		}
+		
+		// Called by animation events to reset attack state
+		public void OnAttackAnimationEnd(NetworkIdentity identity, string attackName)
+		{
+			if (identity != netIdentity) return;
+
+			canAttack = true;
+			
+			switch (attackName)
+			{
+				case "Anim_Attack_4":
+					
+					break;
+				default:
+					break;
+			}
+			
+		}
+		
+		// Called by animation events when attack should deal damage
+		public void OnAttackHit(NetworkIdentity identity, string attackName)
+		{
+			if (identity != netIdentity) return;
+			CmdCreateAttackHitBox();
+			switch (attackName)
+			{
+				case "Anim_Attack_4":
+					if (isLocalPlayer && targetAttackActor != null && IsEnemyInRange(targetAttackActor))
+					{
+						// Apply damage logic here
+						// Debug.Log($"Attacking {targetAttackActor.name}");
+						// Example: targetAttackActor.GetComponent<EnemyHealth>()?.TakeDamage(attackDamage);
+					}
+
+					break;
+				default:
+					break;
+			}
 		}
 
 		#endregion
 
 
-		#region Network Update Server/Client
+		private void SetPlane()
+		{
+			defaultPlane.SetActive(true);
+			plane2.SetActive(false);
+		}
+
+
+		#region Server/Client RPC
+
+		[Command]
+		public void CmdCreateAttackHitBox()
+		{
+			RpcCreateAttackHitBox();
+		}
+		
+		[ClientRpc]
+		public void RpcCreateAttackHitBox()
+		{
+			GameObject go = Instantiate(attackHitBox, attackHitBoxTransform.position, attackHitBoxTransform.rotation);
+			
+			var box = go.GetComponent<AttackHitBox>();
+			if (box != null)
+			{
+				box.Hero = gameObject;
+				box.Damage = ATK_damage;
+			}
+		}
+
+		//--------------------------------------------------------------------------------------------------------------
+		//-->									ANIMATION															 <--
+		//--------------------------------------------------------------------------------------------------------------
 		
 		[Command]
 		public void CmdSetAnimBool(int name, bool value)
 		{
 			RpcSetAnimBool(name, value);
-			animator.SetBool(name, value);
+			//animator.SetBool(name, value);
 		}
 
 		[ClientRpc]
-		private void RpcSetAnimBool(int name, bool value)
+		public void RpcSetAnimBool(int name, bool value)
 		{
-			animator.SetBool(name, value);
+			if (animator != null) animator.SetBool(name, value);
 		}
+		
+		
+		[Command]
+		public void CmdSetAnimTrigger(int name)
+		{
+			RpcSetAnimTrigger(name);
+			//animator.SetTrigger(name);
+		}
+
+		[ClientRpc]
+		public void RpcSetAnimTrigger(int name)
+		{
+			if (animator != null) animator.SetTrigger(name);
+		}
+		
 		#endregion
 		
 		
