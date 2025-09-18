@@ -13,3 +13,10 @@
 <p align="left">[MMORPG + Mirror] Personal project using Unity and c#</p>
 
 ![alt text](image.png)
+
+
+<p align="left">Update 0.1</p>
+![alt text](image-1.png)
+![alt text](image-2.png)
+![alt text](image-3.png)
+![alt text](image-4.png)

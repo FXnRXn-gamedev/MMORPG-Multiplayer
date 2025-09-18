@@ -775,7 +775,7 @@ MonoBehaviour:
   syncInterval: 0
   moveSpeed: 3.5
   attackRange: 2
-  ATK_damage: 100
+  ATK_damage: 10
   mousePositionPrefab: {fileID: 6388266500498811169, guid: cf069817f639e3b469fd82c97e47ef3d, type: 3}
   defaultPlane: {fileID: 564474460274190815}
   plane2: {fileID: 7835165017716357233}

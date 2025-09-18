@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using Mirror;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 namespace FXnRXn
 {
@@ -36,7 +37,8 @@ namespace FXnRXn
 		[Header("Stat")] 
 		[Space(10)] 
 		[field: SerializeField] private float				ATK_damage;
-		
+		[field: SerializeField] private float				HP = 100.0f;
+		[field: SerializeField] private float				DEF = 0.0f;
 		[Header("Refference")]
 		[Space(10)]
 		[field: SerializeField] private GameObject			mousePositionPrefab;
@@ -66,9 +68,11 @@ namespace FXnRXn
 
 		private GameObject targetNow;
 		private GameObject targetAttackActor;
-
+		
+		[SyncVar(hook = "HPBarUpdate")] public float currentHP;
 		private bool isAttack = false;
 		[SyncVar] private bool canAttack = true;
+		private Slider playerHealthXPSlider_UI;
 		#endregion
 
 		#region Network Method
@@ -96,10 +100,14 @@ namespace FXnRXn
 			if (animator == null) animator = GetComponentInChildren<Animator>();
 			
 			agent.speed = moveSpeed;
+			currentHP = HP;
 			if (isLocalPlayer)
 			{
 				SetPlane();
+				if (playerHealthXPSlider_UI == null) playerHealthXPSlider_UI = UIManager.Instance?.GetPlayerXPSlider;
 			}
+			
+			HPBarUpdate(0, 0);
 			
 			AnimationEventHandler.onAttackAnimationEndEvent += OnAttackAnimationEnd;
 			AnimationEventHandler.onAttackHitEvent += OnAttackHit;
@@ -210,7 +218,9 @@ namespace FXnRXn
 			directionToEnemy.y = 0; // Keep only horizontal rotation
 			if (directionToEnemy != Vector3.zero)
 			{
-				transform.rotation = Quaternion.LookRotation(directionToEnemy);
+				transform.rotation = Quaternion.Euler(transform.position.x, 
+					(Quaternion.LookRotation(targetAttackActor.transform.position - transform.position)).eulerAngles.y, 
+					transform.position.z);
 			}
 			
 			// Player can attack
@@ -309,7 +319,22 @@ namespace FXnRXn
 			defaultPlane.SetActive(true);
 			plane2.SetActive(false);
 		}
+		
+		public virtual void GetHit(float damage, GameObject hitGO)
+		{
+			currentHP = Mathf.Max(0, currentHP - Mathf.Max(0, damage - DEF));
+			HPBarUpdate(0,0);
+			// if (currentHP <= 0)
+			// {
+			// 	currentHP = 0;
+			// 	Destroy(gameObject);
+			// }
+		}
 
+		public void HPBarUpdate(float HPold, float HPnow)
+		{
+			if (playerHealthXPSlider_UI != null) playerHealthXPSlider_UI.value = currentHP / HP;
+		}
 
 		#region Server/Client RPC
 
